@@ -16,7 +16,7 @@ def product_create_view(request):
     context = {
         'form': form
     }
-    return redirect(request, 'invApp/product_form.html', context)
+    return render(request, 'invApp/product_form.html', context)
 
 def product_list_view(request):
     products = Product.objects.all()
@@ -37,7 +37,7 @@ def product_update_view(request, product_id):
         'form': form,
         'product': product
     }
-    return redirect(request, 'invApp/product_form.html', context)
+    return render(request, 'invApp/product_form.html', context)
 
 def product_delete_view(request, product_id):
     product = Product.objects.get(id=product_id)
