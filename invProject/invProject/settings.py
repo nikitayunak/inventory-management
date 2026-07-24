@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +26,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'invApp',
     'crispy_forms',
     'crispy_bootstrap5',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,9 @@ ROOT_URLCONF = 'invProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / "templates"
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,3 +130,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+#LOGIN_REDIRECT_URL = 'product_list'
+#LOGOUT_REDIRECT_URL = 'login'
