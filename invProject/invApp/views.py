@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
 from .models import Product
 
@@ -6,6 +7,7 @@ from .models import Product
 def home_view(request):
     return render(request, 'invApp/home.html')
 
+@login_required
 def product_create_view(request):
     form = ProductForm()
     if request.method == 'POST':
@@ -18,6 +20,7 @@ def product_create_view(request):
     }
     return render(request, 'invApp/product_form.html', context)
 
+@login_required
 def product_list_view(request):
     products = Product.objects.all()
     context = {
@@ -25,6 +28,7 @@ def product_list_view(request):
     }
     return render(request, 'invApp/product_list.html', context)
 
+@login_required
 def product_update_view(request, product_id):
     product = Product.objects.get(id=product_id)
     form = ProductForm(instance=product)
@@ -39,6 +43,7 @@ def product_update_view(request, product_id):
     }
     return render(request, 'invApp/product_form.html', context)
 
+@login_required
 def product_delete_view(request, product_id):
     product = Product.objects.get(id=product_id)
     if request.method == 'POST':
